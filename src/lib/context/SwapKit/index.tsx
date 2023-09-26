@@ -3,8 +3,9 @@
 
     Serve SwapKit into a react provider
 */
-import { AssetAmount } from '@pioneer-platform/swapkit-entities';
+import { AssetAmount } from "@pioneer-platform/swapkit-entities";
 // import { getSwapKitClient } from './client';
+import { Chain, EVMChainList, WalletOption } from "@pioneer-platform/types";
 
 import {
   createContext,
@@ -35,73 +36,30 @@ const eventEmitter = new EventEmitter();
 
 export enum WalletActions {
   SET_STATUS = "SET_STATUS",
-  SET_USERNAME = "SET_USERNAME",
-  SET_API = "SET_API",
-  SET_APP = "SET_APP",
-  SET_WALLET = "SET_WALLET",
-  SET_WALLET_DESCRIPTIONS = "SET_WALLET_DESCRIPTIONS",
-  SET_CONTEXT = "SET_CONTEXT",
-  SET_ASSET_CONTEXT = "SET_ASSET_CONTEXT",
-  SET_BLOCKCHAIN_CONTEXT = "SET_BLOCKCHAIN_CONTEXT",
-  SET_PUBKEY_CONTEXT = "SET_PUBKEY_CONTEXT",
-  ADD_WALLET = "ADD_WALLET",
+  SET_SWAPKIT = "SET_SWAPKIT",
   RESET_STATE = "RESET_STATE",
 }
 
 export interface InitialState {
   // keyring: Keyring;
   status: any;
-  username: string;
-  serviceKey: string;
-  queryKey: string;
-  context: string;
-  assetContext: string;
-  blockchainContext: string;
-  pubkeyContext: string;
-  walletDescriptions: any[];
-  totalValueUsd: number;
-  app: any;
-  api: any;
+  swapKit: any;
 }
 
 const initialState: InitialState = {
   status: "disconnected",
-  username: "",
-  serviceKey: "",
-  queryKey: "",
-  context: "",
-  assetContext: "",
-  blockchainContext: "",
-  pubkeyContext: "",
-  walletDescriptions: [],
-  totalValueUsd: 0,
-  app: null,
-  api: null,
+  swapKit: null,
 };
 
 export interface ISwapContext {
   state: InitialState;
-  username: string | null;
-  context: string | null;
+  swapKit: any | null;
   status: string | null;
-  totalValueUsd: number | null;
-  assetContext: string | null;
-  blockchainContext: string | null;
-  pubkeyContext: string | null;
-  app: any;
-  api: any;
 }
 
 export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
-  | { type: WalletActions.SET_USERNAME; payload: string }
-  | { type: WalletActions.SET_APP; payload: any }
-  | { type: WalletActions.SET_API; payload: any }
-  | { type: WalletActions.SET_CONTEXT; payload: any }
-  | { type: WalletActions.SET_ASSET_CONTEXT; payload: any }
-  | { type: WalletActions.SET_BLOCKCHAIN_CONTEXT; payload: any }
-  | { type: WalletActions.SET_PUBKEY_CONTEXT; payload: any }
-  | { type: WalletActions.ADD_WALLET; payload: any }
+  | { type: WalletActions.SET_SWAPKIT; payload: any }
   | { type: WalletActions.RESET_STATE };
 
 const reducer = (state: InitialState, action: ActionTypes) => {
@@ -109,32 +67,13 @@ const reducer = (state: InitialState, action: ActionTypes) => {
     case WalletActions.SET_STATUS:
       eventEmitter.emit("SET_STATUS", action.payload);
       return { ...state, status: action.payload };
-    case WalletActions.SET_CONTEXT:
-      //eventEmitter.emit("SET_CONTEXT", action.payload);
-      return { ...state, context: action.payload };
-    case WalletActions.SET_ASSET_CONTEXT:
-      //eventEmitter.emit("SET_ASSET_CONTEXT", action.payload);
-      return { ...state, assetContext: action.payload };
-    case WalletActions.SET_BLOCKCHAIN_CONTEXT:
-      //eventEmitter.emit("SET_BLOCKCHAIN_CONTEXT", action.payload);
-      return { ...state, blockchainContext: action.payload };
-    case WalletActions.SET_PUBKEY_CONTEXT:
-      //eventEmitter.emit("SET_PUBKEY_CONTEXT", action.payload);
-      return { ...state, pubkeyContext: action.payload };
-    case WalletActions.SET_USERNAME:
-      //eventEmitter.emit("SET_USERNAME", action.payload);
-      return { ...state, username: action.payload };
-    case WalletActions.SET_APP:
-      return { ...state, app: action.payload };
-    case WalletActions.SET_API:
-      return { ...state, api: action.payload };
+    case WalletActions.SET_SWAPKIT:
+      eventEmitter.emit("SET_SWAPKIT", action.payload);
+      return { ...state, swapKit: action.payload };
     case WalletActions.RESET_STATE:
       return {
         ...state,
-        api: null,
-        user: null,
-        username: null,
-        context: null,
+        swapKit: null,
         status: null,
       };
     default:
@@ -153,6 +92,7 @@ export const SwapProvider = ({
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
   const [keys, setKeys] = useState(config);
+  const [swapKit, setSwapKit] = useState(config);
   const [{ inputAsset, outputAsset }, setSwapAssets] = useState<{
     inputAsset?: AssetAmount;
     outputAsset?: AssetAmount;
@@ -162,6 +102,67 @@ export const SwapProvider = ({
     try {
       // eslint-disable-next-line no-console
       console.log("onStart***** ");
+
+      const config = {
+        covalentApiKey:
+          // @ts-ignore
+          import.meta.env.VITE_COVALENT_API_KEY ||
+          "cqt_rQ6333MVWCVJFVX3DbCCGMVqRH4q",
+        ethplorerApiKey:
+          // @ts-ignore
+          import.meta.env.VITE_ETHPLORER_API_KEY || "EK-xs8Hj-qG4HbLY-LoAu7",
+        utxoApiKey:
+          // @ts-ignore
+          import.meta.env.VITE_BLOCKCHAIR_API_KEY ||
+          "A___Tcn5B16iC3mMj7QrzZCb2Ho1QBUf",
+        walletConnectProjectId:
+          // @ts-ignore
+          import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID || "",
+      };
+      console.log("config: ", config);
+      const { SwapKitCore } = await import("@pioneer-platform/swapkit-core");
+      const { keystoreWallet } = await import("@pioneer-platform/keystore");
+      const { keepkeyWallet } = await import("@pioneer-platform/keepkey");
+      const { walletconnectWallet } = await import(
+        "@pioneer-platform/walletconnect"
+      );
+      const client = new SwapKitCore();
+      client.extend({
+        config,
+        wallets: [keystoreWallet, keepkeyWallet, walletconnectWallet],
+      });
+
+      const AllChainsSupported = [
+        Chain.Arbitrum,
+        Chain.Avalanche,
+        Chain.Binance,
+        Chain.BinanceSmartChain,
+        Chain.Bitcoin,
+        Chain.BitcoinCash,
+        Chain.Cosmos,
+        Chain.Dogecoin,
+        Chain.Ethereum,
+        Chain.Litecoin,
+        Chain.Optimism,
+        Chain.Polygon,
+        Chain.THORChain,
+      ] as Chain[];
+      console.log("client: ", client);
+      // @ts-ignore
+      const result = await client.connectKeepKey(AllChainsSupported);
+      console.log("result: ", result);
+      setSwapKit(client);
+      dispatch({
+        type: WalletActions.SET_STATUS,
+        payload: "keepkey connected!",
+      });
+      // @ts-ignore
+      dispatch({
+        type: WalletActions.SET_SWAPKIT,
+        payload: client,
+      });
+
+      //if walletconnect connect to walletconnect
     } catch (e) {
       console.error("e: ", e);
     }
