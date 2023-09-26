@@ -23,7 +23,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@bithighlander/swapkit-keepkey": "1.0.0-development.1",
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.0",
     "@emotion/react": "^11.10.8",
