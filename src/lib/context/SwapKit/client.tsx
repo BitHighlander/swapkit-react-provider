@@ -1,13 +1,13 @@
-import { evmWallet } from "@thorswap-lib/evm-web3-wallets";
-import { keplrWallet } from "@thorswap-lib/keplr";
-import { keystoreWallet } from "@thorswap-lib/keystore";
-import { ledgerWallet } from "@thorswap-lib/ledger";
-import { okxWallet } from "@thorswap-lib/okx";
-import { SwapKitCore } from "@thorswap-lib/swapkit-core";
-import { trezorWallet } from "@thorswap-lib/trezor";
+import { evmWallet } from "@pioneer-platform/evm-web3-wallets";
+import { keplrWallet } from "@pioneer-platform/keplr";
+import { keystoreWallet } from "@pioneer-platform/keystore";
+import { ledgerWallet } from "@pioneer-platform/ledger";
+import { okxWallet } from "@pioneer-platform/okx";
+import { SwapKitCore } from "@pioneer-platform/swapkit-core";
+import { trezorWallet } from "@pioneer-platform/trezor";
 import { keepkeyWallet } from "@bithighlander/swapkit-keepkey";
-import { walletconnectWallet } from "@thorswap-lib/walletconnect";
-import { xdefiWallet } from "@thorswap-lib/xdefi";
+import { walletconnectWallet } from "@pioneer-platform/walletconnect";
+import { xdefiWallet } from "@pioneer-platform/xdefi";
 
 export const getSwapKitClient = ({
   ethplorerApiKey = "freekey",

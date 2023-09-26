@@ -1,6 +1,6 @@
-import { SwapKitCore } from '@thorswap-lib/swapkit-core';
-import { Amount, AssetAmount } from '@thorswap-lib/swapkit-entities';
-import { Chain } from '@thorswap-lib/types';
+import { SwapKitCore } from '@pioneer-platform/swapkit-core';
+import { Amount, AssetAmount } from '@pioneer-platform/swapkit-entities';
+import { Chain } from '@pioneer-platform/types';
 import { useCallback, useState } from 'react';
 
 export default function Send({

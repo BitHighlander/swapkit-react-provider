@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { SwapKitCore } from "@thorswap-lib/swapkit-core";
+import { SwapKitCore } from "@pioneer-platform/swapkit-core";
 import { useSwap } from "lib/context/SwapKit";
 
 import Loan from "lib/components/Loan";

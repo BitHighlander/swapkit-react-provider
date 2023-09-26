@@ -1,7 +1,7 @@
-import { decryptFromKeystore } from '@thorswap-lib/keystore';
-import { getDerivationPathFor } from '@thorswap-lib/ledger';
-import { SwapKitCore } from '@thorswap-lib/swapkit-core';
-import { Chain, EVMChainList, WalletOption } from '@thorswap-lib/types';
+import { decryptFromKeystore } from '@pioneer-platform/keystore';
+import { getDerivationPathFor } from '@pioneer-platform/ledger';
+import { SwapKitCore } from '@pioneer-platform/swapkit-core';
+import { Chain, EVMChainList, WalletOption } from '@pioneer-platform/types';
 import { useCallback, useState } from 'react';
 
 import { WalletDataType } from './types';
@@ -79,8 +79,7 @@ export const WalletPicker = ({ skClient, setWallet }: Props) => {
           return skClient.connectLedger(chains[0], derivationPath);
         }
         case WalletOption.KEEPKEY: {
-          const derivationPath = getDerivationPathFor({ chain: chains[0], index: 0 });
-          return skClient.connectKeepKey(chains[0], derivationPath);
+          return skClient.connectKeepKey(chains);
         }
         case WalletOption.TREZOR: {
           const derivationPath = getDerivationPathFor({ chain: chains[0], index: 0 });

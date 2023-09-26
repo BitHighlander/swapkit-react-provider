@@ -1,5 +1,5 @@
-import { Amount, SwapKitCore, getTHORNameCost } from '@thorswap-lib/swapkit-core';
-import { Chain } from '@thorswap-lib/types';
+import { Amount, SwapKitCore, getTHORNameCost } from '@pioneer-platform/swapkit-core';
+import { Chain } from '@pioneer-platform/types';
 import { useCallback, useState } from 'react';
 
 export default function TNS({ skClient }: { skClient: SwapKitCore }) {

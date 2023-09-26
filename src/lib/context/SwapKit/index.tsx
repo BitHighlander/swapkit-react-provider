@@ -3,7 +3,7 @@
 
     Serve SwapKit into a react provider
 */
-import { AssetAmount } from '@thorswap-lib/swapkit-entities';
+import { AssetAmount } from '@pioneer-platform/swapkit-entities';
 // import { getSwapKitClient } from './client';
 
 import {

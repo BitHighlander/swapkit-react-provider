@@ -1,6 +1,6 @@
-import { QuoteRoute } from '@thorswap-lib/swapkit-api';
-import { AssetAmount, SwapKitCore } from '@thorswap-lib/swapkit-core';
-import { FeeOption } from '@thorswap-lib/types';
+import { QuoteRoute } from '@pioneer-platform/swapkit-api';
+import { AssetAmount, SwapKitCore } from '@pioneer-platform/swapkit-core';
+import { FeeOption } from '@pioneer-platform/types';
 import { useCallback } from 'react';
 
 import { SwapInputs } from './SwapInputs';
