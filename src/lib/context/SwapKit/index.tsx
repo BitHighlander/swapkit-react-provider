@@ -37,29 +37,34 @@ const eventEmitter = new EventEmitter();
 export enum WalletActions {
   SET_STATUS = "SET_STATUS",
   SET_SWAPKIT = "SET_SWAPKIT",
+  SET_WALLET_DATA = "SET_WALLET_DATA",
   RESET_STATE = "RESET_STATE",
 }
 
 export interface InitialState {
   // keyring: Keyring;
   status: any;
+  walletData: any;
   swapKit: any;
 }
 
 const initialState: InitialState = {
   status: "disconnected",
+  walletData: [],
   swapKit: null,
 };
 
 export interface ISwapContext {
   state: InitialState;
   swapKit: any | null;
+  walletData: any;
   status: string | null;
 }
 
 export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
   | { type: WalletActions.SET_SWAPKIT; payload: any }
+  | { type: WalletActions.SET_WALLET_DATA; payload: any }
   | { type: WalletActions.RESET_STATE };
 
 const reducer = (state: InitialState, action: ActionTypes) => {
@@ -70,6 +75,9 @@ const reducer = (state: InitialState, action: ActionTypes) => {
     case WalletActions.SET_SWAPKIT:
       eventEmitter.emit("SET_SWAPKIT", action.payload);
       return { ...state, swapKit: action.payload };
+    case WalletActions.SET_WALLET_DATA:
+      eventEmitter.emit("SET_WALLET_DATA", action.payload);
+      return { ...state, walletData: action.payload };
     case WalletActions.RESET_STATE:
       return {
         ...state,
@@ -102,6 +110,15 @@ export const SwapProvider = ({
     try {
       // eslint-disable-next-line no-console
       console.log("onStart***** ");
+
+      let walletDataCache = localStorage.getItem("walletData");
+      if (walletDataCache) {
+        walletDataCache = JSON.parse(walletDataCache);
+        dispatch({
+          type: WalletActions.SET_WALLET_DATA,
+          payload: walletDataCache,
+        });
+      }
 
       const config = {
         covalentApiKey:
@@ -161,7 +178,19 @@ export const SwapProvider = ({
         type: WalletActions.SET_SWAPKIT,
         payload: client,
       });
-
+      const chains = Object.keys(client.connectedWallets);
+      //calculate walletDaa
+      const walletDataArray = await Promise.all(
+        // @ts-ignore
+        chains.map(client.getWalletByChain)
+      );
+      if (walletDataArray) {
+        dispatch({
+          type: WalletActions.SET_WALLET_DATA,
+          payload: walletDataArray,
+        });
+        localStorage.setItem("walletData", JSON.stringify(walletDataArray));
+      }
       //if walletconnect connect to walletconnect
     } catch (e) {
       console.error("e: ", e);

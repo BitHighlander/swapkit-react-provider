@@ -260,17 +260,6 @@
     varuint-bitcoin "^1.0.4"
     wif "^2.0.1"
 
-"@bithighlander/swapkit-keepkey@1.0.0-development.1":
-  version "1.0.0-development.1"
-  resolved "https://registry.yarnpkg.com/@bithighlander/swapkit-keepkey/-/swapkit-keepkey-1.0.0-development.1.tgz#150d2000d61f13c28645d55d41241cbf75079036"
-  integrity sha512-eyVMxIkHx48Tf+EI8LlBLDQIbRNQzZbA1PjTdEXSMjg7WMSsvrnvGAwATFsACcUFAVQknf3d9b2/ENXNhFCcvg==
-  dependencies:
-    "@keepkey/keepkey-sdk" "^0.2.49"
-    "@pioneer-platform/pioneer-coins" "^8.1.82"
-    "@thorswap-lib/helpers" "workspace:*"
-    "@thorswap-lib/swapkit-entities" "workspace:*"
-    "@thorswap-lib/types" "workspace:*"
-
 "@blakeembrey/deque@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@blakeembrey/deque/-/deque-1.0.5.tgz#f4fa17fc5ee18317ec01a763d355782c7b395eaf"
@@ -2310,11 +2299,6 @@
   resolved "https://registry.yarnpkg.com/@keepkey/keepkey-sdk/-/keepkey-sdk-0.2.49.tgz#53561a6cd7c9ba11e332ffbe4bbf80819d429816"
   integrity sha512-rVfj4P2dbJZgsZRh3+BQ8UpdZYfUYgD+nxiSUkG96dj8Q8qC0PY2vErzGeRtJ/L6CN7RqD3mShTeN0KNtS2aEQ==
 
-"@keepkey/keepkey-sdk@^0.2.49":
-  version "0.2.51"
-  resolved "https://registry.yarnpkg.com/@keepkey/keepkey-sdk/-/keepkey-sdk-0.2.51.tgz#9c1608bdfe3409ebdcc41475a05649d21ad7869f"
-  integrity sha512-If26sK9m383kJclBpQ9qxu4wKftHmPhju1OdlpEIxo7wcl+0PyNLMgApi/81d2ra3TvVsE798hA8lZE2bf7BLQ==
-
 "@keepkey/keepkey-sdk@^0.2.52":
   version "0.2.52"
   resolved "https://registry.yarnpkg.com/@keepkey/keepkey-sdk/-/keepkey-sdk-0.2.52.tgz#4e31e4d4e2938d872da31364e055968dc27c2e78"
@@ -2751,27 +2735,6 @@
   resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-coins/-/pioneer-coins-8.1.74.tgz#474bb337796791f3fe83ba592a7379a7ca856fde"
   integrity sha512-HznMC3n9jEuiG3u4LmU9yZGBlQskQntMnnZqFEBSYK50Lq8vMEDl6HuoDthTI86YPnO47krJk0OEAdILGIKDgw==
   dependencies:
-    bech32 "^1.1.4"
-    bignumber.js "^9.0.1"
-    bitcoin-regex "^2.0.0"
-    bitcoincash-regex "^1.1.8"
-    bs58check "^3.0.1"
-    crypto-js "^4.0.0"
-    dash-regex "^1.0.10"
-    dogecoin-regex "^1.0.9"
-    ethereum-regex "^1.1.12"
-    ethereum-tx-decoder "^3.0.0"
-    litecoin-regex "^1.0.8"
-    monero-regex "^1.0.8"
-    neo-regex "^1.0.7"
-    ripple-regex "^1.1.8"
-
-"@pioneer-platform/pioneer-coins@^8.1.82":
-  version "8.1.82"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-coins/-/pioneer-coins-8.1.82.tgz#1aa3795145c9ecdf6b7bb3e387f75a83830bacdf"
-  integrity sha512-q9gqeIKKke28F3nJQRSNj/5W5eUA6gx/ID0/qbj6Dcyhl+tZS+zM22O7Qce2/jqCKiHUNzVLVEGurSGI3qZ8OA==
-  dependencies:
-    "@pioneer-platform/loggerdog" "^8.1.31"
     bech32 "^1.1.4"
     bignumber.js "^9.0.1"
     bitcoin-regex "^2.0.0"
@@ -3702,27 +3665,6 @@
   integrity sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==
   dependencies:
     defer-to-connect "^2.0.0"
-
-"@thorswap-lib/helpers@workspace:*":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@thorswap-lib/helpers/-/helpers-0.0.0.tgz#9d3c9bf7c259dff23810342da01071871def3981"
-  integrity sha512-wGUb1UeXlf0L0HMAHJVup4KH5imUHLvTV0rNaTkmkVM7p+nyVXNw0lpJ4g1EUpPkWvJ2DOlZy5ekUs9PZtI8fA==
-  dependencies:
-    "@thorswap-lib/swapkit-entities" "1.0.0"
-    "@thorswap-lib/types" "1.0.0"
-
-"@thorswap-lib/swapkit-entities@1.0.0", "@thorswap-lib/swapkit-entities@workspace:*":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@thorswap-lib/swapkit-entities/-/swapkit-entities-1.0.0.tgz#6fd663588822c2899eb24a90f7a96efad7eeabbb"
-  integrity sha512-fF2Xwr58sujLGearctzfLD+kMdcqn9lUUTQ4pNVuN/oKX+qyVNsyGKkMT1/CFk+zCCps/mYoAcTuLIwNMw82aw==
-  dependencies:
-    "@thorswap-lib/types" "1.0.0"
-    tiny-invariant "1.3.1"
-
-"@thorswap-lib/types@1.0.0", "@thorswap-lib/types@workspace:*":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@thorswap-lib/types/-/types-1.0.0.tgz#c55271644ab5e3b1050a63e859f6e37b82b19151"
-  integrity sha512-XI4V4FfRs2YbOTJ05Z/N7mTSBz1X2DZsWHRpFla7aZImFQ47ZrNqKQEC10AQUz8PJHhzqGwPOsCmwMcvs51CCA==
 
 "@trezor/analytics@1.0.5":
   version "1.0.5"

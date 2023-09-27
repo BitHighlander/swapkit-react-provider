@@ -5,7 +5,7 @@ import { ledgerWallet } from "@pioneer-platform/ledger";
 import { okxWallet } from "@pioneer-platform/okx";
 import { SwapKitCore } from "@pioneer-platform/swapkit-core";
 import { trezorWallet } from "@pioneer-platform/trezor";
-import { keepkeyWallet } from "@bithighlander/swapkit-keepkey";
+import { keepkeyWallet } from "@pioneer-platform/keepkey";
 import { walletconnectWallet } from "@pioneer-platform/walletconnect";
 import { xdefiWallet } from "@pioneer-platform/xdefi";
 
