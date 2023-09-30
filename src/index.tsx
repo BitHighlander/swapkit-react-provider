@@ -11,15 +11,15 @@ import { theme } from "lib/styles/theme";
 import App from "./App";
 
 //begin dev mode
-// const root = ReactDOM.createRoot(
-//   document.getElementById("root") as HTMLElement
-// );
-// root.render(
-//   <>
-//     <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
-//     <App />
-//   </>
-// );
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <>
+    <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
+    <App />
+  </>
+);
 //end dev mode
 
 //publish as lib
