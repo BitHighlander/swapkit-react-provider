@@ -140,13 +140,19 @@ export const SwapProvider = ({
       const { SwapKitCore } = await import("@pioneer-platform/swapkit-core");
       const { keystoreWallet } = await import("@pioneer-platform/keystore");
       const { keepkeyWallet } = await import("@pioneer-platform/keepkey");
+      const { metamaskWallet } = await import("@pioneer-platform/metamask");
       const { walletconnectWallet } = await import(
         "@pioneer-platform/walletconnect"
       );
       const client = new SwapKitCore();
       client.extend({
         config,
-        wallets: [keystoreWallet, keepkeyWallet, walletconnectWallet],
+        wallets: [
+          keystoreWallet,
+          keepkeyWallet,
+          walletconnectWallet,
+          metamaskWallet,
+        ],
       });
 
       const AllChainsSupported = [
@@ -164,10 +170,33 @@ export const SwapProvider = ({
         Chain.Polygon,
         Chain.THORChain,
       ] as Chain[];
+
+      const MetaMaskChainsSupported = [
+        Chain.Arbitrum,
+        Chain.Avalanche,
+        Chain.BinanceSmartChain,
+        Chain.Bitcoin,
+        Chain.BitcoinCash,
+        Chain.Cosmos,
+        Chain.Dogecoin,
+        Chain.Ethereum,
+        Chain.Litecoin,
+        Chain.Optimism,
+        Chain.Polygon,
+        Chain.THORChain,
+      ] as Chain[];
+
       console.log("client: ", client);
       // @ts-ignore
-      const result = await client.connectKeepKey(AllChainsSupported);
-      console.log("result: ", result);
+      const resultKeepKey = await client.connectKeepKey(AllChainsSupported);
+      console.log("resultKeepKey: ", resultKeepKey);
+      console.log("client: ", client);
+      // @ts-ignore
+      // const resultMetamask = await client.connectMetaMask(
+      //   MetaMaskChainsSupported
+      // );
+      // console.log("resultMetamask: ", resultMetamask);
+
       setSwapKit(client);
       dispatch({
         type: WalletActions.SET_STATUS,
